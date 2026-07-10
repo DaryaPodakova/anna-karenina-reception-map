@@ -1,0 +1,6 @@
+# Full third-party review texts are retained only as local research evidence.
+local_evidence/
+
+# Local Python artifacts.
+__pycache__/
+*.py[cod]

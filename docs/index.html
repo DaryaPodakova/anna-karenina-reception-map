@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Граф рецептивных связей романа Анна Каренина и экранизации Александра Зархи.">
+  <title>Anna Karenina Reception Map</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <p class="eyebrow">Anna Karenina Reception Map</p>
+        <span class="sample-badge">Первый маршрут MVP · 24 отзыва · 80 упоминаний</span>
+      </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Один роман — две карты внимания</h1>
+          <p class="lead">В пилотной выборке особенно заметен второй центр романа: линия Левина. В рецепции фильма она проявляется прежде всего через жалобы на адаптационные потери и экранное исполнение.</p>
+        </div>
+        <div class="thesis-facts" aria-label="Ключевые выводы">
+          <article><strong id="levinFact">10</strong><span>Левин как второй центр</span></article>
+          <article><strong id="lossFact">13</strong><span>адаптационных потерь</span></article>
+          <article><strong id="actingFact">13</strong><span>оценок актёрского воплощения</span></article>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="page-tabs" aria-label="Разделы дашборда">
+      <button id="researchPageTab" class="active" type="button">Исследование</button>
+      <button id="reviewsPageTab" type="button">Отзывы <span>24</span></button>
+    </nav>
+
+    <div id="researchPage">
+    <section class="controls" aria-label="Фильтры графа">
+      <div class="controls-status">
+        <span class="label">Срез графа</span>
+        <strong id="filteredCount">80 упоминаний</strong>
+      </div>
+      <label>
+        Объект
+        <select id="objectFilter"><option value="">Роман + фильм</option></select>
+      </label>
+      <label>
+        Рамка
+        <select id="frameFilter"><option value="">Все рамки</option></select>
+      </label>
+      <label>
+        Тон
+        <select id="sentimentFilter"><option value="">Любой тон</option></select>
+      </label>
+      <label class="search-control">
+        Поиск
+        <input id="searchInput" type="search" placeholder="Анна, Левин, бал...">
+      </label>
+      <button id="resetFilters" type="button">Сбросить</button>
+    </section>
+
+    <section class="graph-workspace">
+      <article class="graph-panel">
+        <div class="panel-heading">
+          <div>
+            <p id="graphEyebrow" class="eyebrow">Главный исследовательский аргумент</p>
+            <h2 id="graphTitle">Роман ↔ фильм</h2>
+            <p id="graphDescription">Общий узел соединяет две независимые рецепции, а внутренний сегмент кино-полосы показывает долю упоминаний об адаптационной потере.</p>
+          </div>
+          <div class="graph-tools">
+            <div class="view-switch" aria-label="Режим визуализации">
+              <button id="networkView" type="button">Карта совместной встречаемости</button>
+              <button id="comparisonView" class="active" type="button">Роман ↔ фильм</button>
+            </div>
+            <div id="graphLegend" class="graph-legend" aria-label="Легенда графа">
+              <span class="legend-object">Роман</span>
+              <span class="legend-entity">Общий узел</span>
+              <span class="legend-frame">Фильм</span>
+              <span class="legend-loss">Из них потеря</span>
+            </div>
+          </div>
+        </div>
+        <div id="networkGraph" class="network-wrap" aria-live="polite"></div>
+        <p id="graphHint" class="graph-hint">Нажмите на полосу, чтобы выбрать одну выборку; центральный узел показывает общее внимание к персонажу.</p>
+      </article>
+
+      <aside class="proof-card" aria-live="polite">
+        <div class="proof-topline">
+          <span id="proofType" class="proof-type">Как читать граф</span>
+          <button id="clearSelection" type="button">Общий вид</button>
+        </div>
+        <h2 id="proofTitle">Выберите узел</h2>
+        <p id="proofMeta" class="proof-meta">Карточка покажет частоту, соседние рамки и короткие доказательные резюме.</p>
+        <div id="proofTags" class="proof-tags"></div>
+        <div class="proof-interpretation">
+          <span>Что показывает этот узел</span>
+          <p id="proofInterpretation">Выберите узел или сторону графика, чтобы увидеть исследовательское прочтение.</p>
+        </div>
+        <div id="proofEvidence" class="proof-evidence"></div>
+      </aside>
+    </section>
+
+    <section class="evidence-panel">
+      <div class="panel-heading evidence-heading">
+        <div>
+          <p class="eyebrow">Проверка интерпретации</p>
+          <h2>Короткие доказательства</h2>
+          <p>По умолчанию показаны шесть строк — полный список раскрывается только по запросу.</p>
+        </div>
+        <div class="evidence-actions">
+          <span id="tableCount">80 строк</span>
+          <button id="toggleEvidence" type="button">Показать все</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Источник</th>
+              <th>Связь</th>
+              <th>Уровень оценки</th>
+              <th>Доказательное резюме</th>
+              <th>Уверенность</th>
+            </tr>
+          </thead>
+          <tbody id="mentionsTable"></tbody>
+        </table>
+      </div>
+    </section>
+    </div>
+
+    <div id="reviewsPage" hidden>
+      <section class="reviews-intro">
+        <div>
+          <p class="eyebrow">Корпус и проверка разметки</p>
+          <h2>Оригинальные отзывы</h2>
+          <p>Полные тексты 24 публичных отзывов с метаданными и нашей текущей разметкой. Карточки свёрнуты, чтобы корпус оставался читаемым.</p>
+        </div>
+        <div class="reviews-summary">
+          <strong id="reviewsVisibleCount">24</strong>
+          <span>отзыва в текущем срезе</span>
+        </div>
+      </section>
+
+      <section class="reviews-controls" aria-label="Фильтры отзывов">
+        <label>
+          Объект
+          <select id="reviewsObjectFilter"><option value="">Роман + фильм</option></select>
+        </label>
+        <label>
+          Режим отзыва
+          <select id="reviewsModeFilter"><option value="">Все режимы</option></select>
+        </label>
+        <label class="reviews-search-control">
+          Поиск по автору, заголовку или полному тексту
+          <input id="reviewsSearch" type="search" placeholder="Автор, Левин, актёрская игра...">
+        </label>
+        <button id="resetReviewFilters" type="button">Сбросить</button>
+      </section>
+
+      <section id="reviewsList" class="reviews-list" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <footer>
+    <p>Пилотная карта внимания, а не рейтинг аудитории. LiveLib: 12 отзывов о романе · Кинопоиск: 12 отзывов о фильме.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
